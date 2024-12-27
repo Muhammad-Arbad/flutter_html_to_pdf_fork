@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 
@@ -11,9 +10,9 @@ class FlutterHtmlToPdf {
 
   /// Creates PDF Document from HTML content
   /// Can throw a [PlatformException] or (unlikely) a [MissingPluginException] converting html to pdf
-  static Future<File> convertFromHtmlContent(String htmlContent, String targetDirectory, String targetName) async {
+  static Future<File> convertFromHtmlContent(String htmlContent, String targetDirectory, String targetName,int timer) async {
     final temporaryCreatedHtmlFile = await FileUtils.createFileWithStringContent(htmlContent, "$targetDirectory/$targetName.html");
-    final generatedPdfFilePath = await _convertFromHtmlFilePath(temporaryCreatedHtmlFile.path);
+    final generatedPdfFilePath = await _convertFromHtmlFilePath(temporaryCreatedHtmlFile.path,timer);
     final generatedPdfFile = FileUtils.copyAndDeleteOriginalFile(generatedPdfFilePath, targetDirectory, targetName);
     temporaryCreatedHtmlFile.delete();
 
@@ -39,10 +38,14 @@ class FlutterHtmlToPdf {
   }
 
   /// Assumes the invokeMethod call will return successfully
-  static Future<String> _convertFromHtmlFilePath(String htmlFilePath) async {
-    final result = await _channel.invokeMethod('convertHtmlToPdf', <String, dynamic>{'htmlFilePath': htmlFilePath});
+  static Future<String> _convertFromHtmlFilePath(String htmlFilePath, [int? timer]) async {
+    final result = await _channel.invokeMethod('convertHtmlToPdf', <String, dynamic>{
+      'htmlFilePath': htmlFilePath,
+      'timer': timer,
+    });
     return result as String;
   }
+
 }
 
 // import 'dart:async';
