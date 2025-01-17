@@ -67,6 +67,8 @@ class HtmlToPdfConverter {
                     super.onPageFinished(view, url)
                     Log.d(TAG, "WebView page finished loading. URL: $url")
 
+
+
                     progressCheckHandler?.removeCallbacks(progressRunnable!!)
                     Handler(Looper.getMainLooper()).postDelayed({
                         createPdfFromWebView(this@apply, applicationContext, callback)
@@ -74,18 +76,18 @@ class HtmlToPdfConverter {
 
 
                 }
-
-                // override fun onReceivedError(
-                //     view: WebView,
-                //     request: WebResourceRequest,
-                //     error: WebResourceError
-                // ) {
-                //     super.onReceivedError(view, request, error)
-                //     Log.e(TAG, "WebView error: ${error.description}")
-                //     cleanupWebView() // Cleanup WebView resources
-                //     callback.onFailure() // Trigger failure callback in case of error
-
-                // }
+//
+//                override fun onReceivedError(
+//                    view: WebView,
+//                    request: WebResourceRequest,
+//                    error: WebResourceError
+//                ) {
+//                    super.onReceivedError(view, request, error)
+//                    Log.e(TAG, "WebView error: ${error.description}")
+//                    cleanupWebView() // Cleanup WebView resources
+//                    callback.onFailure() // Trigger failure callback in case of error
+//
+//                }
 
                 override fun onReceivedHttpError(
                     view: WebView,
@@ -163,7 +165,11 @@ class HtmlToPdfConverter {
     }
 
 
-//    private fun createPdfFromWebView(webView: WebView, applicationContext: Context, callback: Callback) {
+//    private fun createPdfFromWebView(
+//        webView: WebView,
+//        applicationContext: Context,
+//        callback: Callback
+//    ) {
 //        val path = applicationContext.filesDir
 //        Log.d(TAG, "Creating PDF at path: $path")
 //
@@ -172,7 +178,7 @@ class HtmlToPdfConverter {
 //                .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
 //                .setResolution(PrintAttributes.Resolution("pdf", "pdf", 600, 600))
 ////                .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
-//                 .setMinMargins(PrintAttributes.Margins(20, 20, 20, 20)) // Set page margins
+//                .setMinMargins(PrintAttributes.Margins(20, 20, 20, 20)) // Set page margins
 //                .build()
 //
 //            Log.d(TAG, "PrintAttributes set for PDF generation.")
@@ -187,6 +193,7 @@ class HtmlToPdfConverter {
 //                    override fun onSuccess(filePath: String) {
 //                        Log.d(TAG, "PDF generation succeeded. File path: $filePath")
 //                        callback.onSuccess(filePath)
+//
 //                        cleanupWebView()
 //                    }
 //
@@ -208,7 +215,10 @@ class HtmlToPdfConverter {
 //        }
 //    }
 
-    private fun createPdfFromWebView(
+
+
+
+        private fun createPdfFromWebView(
         webView: WebView,
         applicationContext: Context,
         callback: Callback
@@ -323,8 +333,8 @@ class HtmlToPdfConverter {
             cleanupWebView()
         }
     }
-
-
+    
+    
 
     private fun cleanupWebView() {
         retainedWebView?.destroy()
@@ -337,5 +347,14 @@ class HtmlToPdfConverter {
         const val temporaryDocumentName = "TemporaryDocumentName"
         const val temporaryFileName = "TemporaryDocumentFile.pdf"
     }
+
 }
+    
+    
+
+
+
+
+
+
 
