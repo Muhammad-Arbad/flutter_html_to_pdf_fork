@@ -62,13 +62,13 @@ class HtmlToPdfConverter {
 
                 }
 
-                override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
-                    super.onReceivedError(view, request, error)
-                    Log.e(TAG, "WebView error: ${error.description}")
-                    cleanupWebView() // Cleanup WebView resources
-                    callback.onFailure() // Trigger failure callback in case of error
+                // override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+                //     super.onReceivedError(view, request, error)
+                //     Log.e(TAG, "WebView error: ${error.description}")
+                //     cleanupWebView() // Cleanup WebView resources
+                //     callback.onFailure() // Trigger failure callback in case of error
                     
-                }
+                // }
 
                 override fun onReceivedHttpError(view: WebView, request: WebResourceRequest, errorResponse: android.webkit.WebResourceResponse) {
                     super.onReceivedHttpError(view, request, errorResponse)
