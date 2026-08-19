@@ -23,12 +23,21 @@ public class SwiftFlutterHtmlToPdfPlugin: NSObject, FlutterPlugin {
                 return
             }
 
-            // Create a hidden WKWebView
-            let viewController = UIApplication.shared.delegate?.window??.rootViewController
-            wkWebView = WKWebView(frame: viewController!.view.bounds)
+            // Create a hidden WKWebView (scene-safe rootViewController lookup)
+            let viewController = UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first(where: { $0.isKeyWindow })?.rootViewController
+                ?? UIApplication.shared.delegate?.window??.rootViewController
+
+            guard let viewController = viewController else {
+                result(FlutterError(code: "NO_ROOT_VC", message: "Root view controller not found", details: nil))
+                return
+            }
+            wkWebView = WKWebView(frame: viewController.view.bounds)
             wkWebView.isHidden = true
             wkWebView.tag = 100
-            viewController?.view.addSubview(wkWebView)
+            viewController.view.addSubview(wkWebView)
 
             // Load HTML content
             let htmlFileContent = FileHelper.getContent(from: htmlFilePath)
