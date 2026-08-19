@@ -14,8 +14,9 @@ class PDFCreator {
         
         // assign paperRect and printableRect values
         let page = CGRect(x: 0, y: 0, width: 595.2, height: 841.8) // A4, 72 dpi
+        let printable = page.insetBy(dx: 0, dy: 10) // 10pt top & bottom margin (match Android)
         renderer.setValue(page, forKey: "paperRect")
-        renderer.setValue(page, forKey: "printableRect")
+        renderer.setValue(printable, forKey: "printableRect")
         
         // create pdf context and draw each page
         let pdfData = NSMutableData()
