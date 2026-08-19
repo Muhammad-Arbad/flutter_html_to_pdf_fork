@@ -69,9 +69,10 @@ public class SwiftFlutterHtmlToPdfPlugin: NSObject, FlutterPlugin {
     private func generatePDF(for webView: WKWebView) -> String? {
         // A4 size in points: 595.2 x 841.8
         let pageFrame = CGRect(x: 0, y: 0, width: 595.2, height: 841.8)
+        let printableFrame = pageFrame.insetBy(dx: 0, dy: 15) // 15pt top & bottom margin
         let renderer = UIPrintPageRenderer()
         renderer.setValue(pageFrame, forKey: "paperRect")
-        renderer.setValue(pageFrame, forKey: "printableRect")
+        renderer.setValue(printableFrame, forKey: "printableRect")
 
         // Add print formatter
         renderer.addPrintFormatter(webView.viewPrintFormatter(), startingAtPageAt: 0)
