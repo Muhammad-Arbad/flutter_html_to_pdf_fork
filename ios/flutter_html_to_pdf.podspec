@@ -15,7 +15,7 @@ A new Flutter plugin.
   s.source_files = 'flutter_html_to_pdf/Sources/flutter_html_to_pdf/**/*.swift'
   s.dependency 'Flutter'
 
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '13.0'
   s.swift_version = '5.0'
 end
 
